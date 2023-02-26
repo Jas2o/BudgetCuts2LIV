@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetCuts2LIV", "BudgetCuts2LIV\BudgetCuts2LIV.csproj", "{9EA05640-E704-4521-84B0-C9000B489F67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetCutsFixExternalCamera", "BudgetCutsFixExternalCamera\BudgetCutsFixExternalCamera.csproj", "{524B8959-CA64-4683-9FBF-58806C744A96}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9EA05640-E704-4521-84B0-C9000B489F67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EA05640-E704-4521-84B0-C9000B489F67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EA05640-E704-4521-84B0-C9000B489F67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EA05640-E704-4521-84B0-C9000B489F67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{524B8959-CA64-4683-9FBF-58806C744A96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{524B8959-CA64-4683-9FBF-58806C744A96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{524B8959-CA64-4683-9FBF-58806C744A96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{524B8959-CA64-4683-9FBF-58806C744A96}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E22B9EC5-49F7-4526-9B41-103D1B89FFC0}
+	EndGlobalSection
+EndGlobal
