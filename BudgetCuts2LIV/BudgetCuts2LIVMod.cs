@@ -63,6 +63,10 @@ namespace BudgetCuts2LIV
                 exCon.active = false;
                 hasAutoFixed = true;
             }
+	    
+	    // The blue ring under the player causes alpha issues depending on camera distance.
+            GameObject trackingRing = GameObject.Find("Tracking ring");
+            trackingRing.layer = (int)GameLayer.ExcludeFromLIV;
         }
 
 		public void TrySetupLiv() {
@@ -181,14 +185,8 @@ namespace BudgetCuts2LIV
 			liv.MRCameraPrefab = cameraFromPrefab;
 			liv.stage = cameraParent;
 			liv.fixPostEffectsAlpha = true;
-
-			//var volumetricGameSDK = livObject.AddComponent<VolumetricGameSDK>();
-			//volumetricGameSDK.stage = cameraParent;
-			//volumetricGameSDK.HMDCamera = cameraFromPrefab;
-			//volumetricGameSDK.spectatorLayerMask = camera.cullingMask;// | 1 << (int) GameLayer.LivOnly; //From Boneworks mod
-
-			//livObject.AddComponent<WasapiCapture>();
-
+			liv.spectatorLayerMask = -1073741825; //ExcludeFromLiv
+			
 			livObject.SetActive(true);
 		}
 	}
