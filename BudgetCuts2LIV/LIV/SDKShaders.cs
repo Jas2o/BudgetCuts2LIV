@@ -1,19 +1,13 @@
 ﻿using System;
+using MelonLoader;
 using System.Collections;
 using System.Collections.Generic;
-using MelonLoader;
 using UnityEngine;
 
 namespace LIV.SDK.Unity
 {
-    public static class SDKShaders
+    static class SDKShaders
     {
-
-        public static readonly Color GREEN_COLOR = new Color(0f, 1f, 0f, 0.5f);
-        public static readonly Color BLUE_COLOR = new Color(0f, 0f, 1f, 0.5f);
-        public static readonly Color RED_COLOR = new Color(1f, 0f, 0f, 0.5f);
-
-        public static readonly int LIV_COLOR = Shader.PropertyToID("_LivColor");
         public static readonly int LIV_COLOR_MASK = Shader.PropertyToID("_LivColorMask");
         public static readonly int LIV_TESSELLATION_PROPERTY = Shader.PropertyToID("_LivTessellation");
         public static readonly int LIV_CLIP_PLANE_HEIGHT_MAP_PROPERTY = Shader.PropertyToID("_LivClipPlaneHeightMap");
@@ -31,12 +25,9 @@ namespace LIV.SDK.Unity
         public const string LIV_WRITE_SHADER = "Hidden/LIV_Write";
         public const string LIV_FORCE_FORWARD_RENDERING_SHADER = "Hidden/LIV_ForceForwardRendering";
 
-        private class ShaderCache
-        {
-            public ShaderCache(UniverseLib.AssetBundle bundle)
-            {
-                try
-                {
+        public class ShaderCache {
+            public ShaderCache(UniverseLib.AssetBundle bundle) {
+                try {
                     ClipPlaneSimple = LoadShader(bundle, "LIV_ClipPlaneSimple");
                     ClipPlaneSimpleDebug = LoadShader(bundle, "LIV_ClipPlaneSimpleDebug");
                     ClipPlaneComplex = LoadShader(bundle, "LIV_ClipPlaneComplex");
@@ -57,17 +48,14 @@ namespace LIV.SDK.Unity
 
                     if (!state)
                         MelonLogger.Error($"Failed to retreive at least one of the LIV shaders from {bundle.name}");
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     MelonLogger.Error($"Failed to initialize the ShaderCache from asset bundle {bundle.name} : {e}");
                     state = false;
                 }
             }
 
             // TODO: Document change. Il2cpp mods will unload shader assets unless we change the hideFlags.
-            private static Shader LoadShader(UniverseLib.AssetBundle bundle, string name)
-            {
+            private static Shader LoadShader(UniverseLib.AssetBundle bundle, string name) {
                 Shader shader = bundle.LoadAsset<Shader>(name);
                 shader.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                 return shader;
@@ -85,17 +73,15 @@ namespace LIV.SDK.Unity
             public readonly bool state = false;
         }
 
-        private static ShaderCache _shaderCache = null;
+        public static ShaderCache _shaderCache = null;
 
 
-        public static bool LoadFromAssetBundle(UniverseLib.AssetBundle bundle)
-        {
+        public static bool LoadFromAssetBundle(UniverseLib.AssetBundle bundle) {
             _shaderCache = new ShaderCache(bundle);
             return _shaderCache.state;
         }
 
-        public static Shader GetShader(string name)
-        {
+        public static Shader GetShader(string name) {
             if (_shaderCache != null && _shaderCache.state)
                 return GetShaderFromCache(name);
             else
@@ -104,10 +90,8 @@ namespace LIV.SDK.Unity
             return null;
         }
 
-        private static Shader GetShaderFromCache(string name)
-        {
-            switch (name)
-            {
+        private static Shader GetShaderFromCache(string name) {
+            switch (name) {
                 default: return null;
                 case LIV_CLIP_PLANE_SIMPLE_SHADER:
                     return _shaderCache.ClipPlaneSimple;
@@ -127,7 +111,6 @@ namespace LIV.SDK.Unity
                     return _shaderCache.ForceForwardRendering;
             }
         }
-
 
         public static void StartRendering()
         {
@@ -158,6 +141,5 @@ namespace LIV.SDK.Unity
         {
             Shader.DisableKeyword(LIV_MR_BACKGROUND_KEYWORD);
         }
-
     }
 }

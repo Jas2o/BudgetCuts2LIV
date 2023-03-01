@@ -49,6 +49,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>E:\Games\Steam\steamapps\common\Budget Cuts 2 Mission Insolvency\MelonLoader\Managed\Il2Cppmscorlib.dll</HintPath>
     </Reference>
+    <Reference Include="Il2CppSystem">
+      <HintPath>E:\Games\Steam\steamapps\common\Budget Cuts 2 Mission Insolvency\MelonLoader\Managed\Il2CppSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Core">
+      <HintPath>E:\Games\Steam\steamapps\common\Budget Cuts 2 Mission Insolvency\MelonLoader\Managed\Il2CppSystem.Core.dll</HintPath>
+    </Reference>
     <Reference Include="MelonLoader">
       <HintPath>E:\Games\Steam\steamapps\common\Budget Cuts 2 Mission Insolvency\MelonLoader\MelonLoader.dll</HintPath>
     </Reference>
@@ -297,7 +303,7 @@
       <HintPath>E:\Games\Steam\steamapps\common\Budget Cuts 2 Mission Insolvency\MelonLoader\Managed\UnityEngine.XRModule.dll</HintPath>
     </Reference>
     <Reference Include="UniverseLib.IL2CPP.Unhollower">
-      <HintPath>..\UniverseLib.IL2CPP.Unhollower.dll</HintPath>
+      <HintPath>..\..\UniverseLib.IL2CPP.Unhollower.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -306,7 +312,6 @@
     <Compile Include="GameLayer.cs" />
     <Compile Include="LIV\LIV.cs" />
     <Compile Include="LIV\SDKBridge.cs" />
-    <Compile Include="LIV\SDKFont.cs" />
     <Compile Include="LIV\SDKRender.cs" />
     <Compile Include="LIV\SDKRenderShared.cs" />
     <Compile Include="LIV\SDKShaders.cs" />

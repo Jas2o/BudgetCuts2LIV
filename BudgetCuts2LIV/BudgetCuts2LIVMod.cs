@@ -16,7 +16,7 @@ namespace BudgetCuts2LIV
 
 		private GameObject livObject;
 		private Camera spawnedCamera;
-		private static LIV.SDK.Unity.LIV livInstance => LIV.SDK.Unity.LIV.Instance;
+		private static LIV.SDK.Unity.LIV livInstance;
 
 		public override void OnApplicationStart()
 		{
@@ -29,7 +29,7 @@ namespace BudgetCuts2LIV
 			SystemLibrary.LoadLibrary($@"{MelonUtils.BaseDirectory}\Mods\LIVAssets\LIV_Bridge.dll");
 		}
 
-		public override void OnUpdate()
+        public override void OnUpdate()
 		{
 			base.OnUpdate();
 
@@ -49,23 +49,51 @@ namespace BudgetCuts2LIV
 		}
 
 		public void TryFixGame() {
-            // Try to fix what breaks the game starting with ExternalCamera.cfg present that LIV likes to make.
-            GameObject exCam = GameObject.Find("External Camera");
-            if (exCam != null) {
-                MelonLogger.Msg("Disabling 'External Camera' to fix game.");
-                exCam.active = false;
+			// Try to fix what breaks the game starting with ExternalCamera.cfg present that LIV likes to make.
+			GameObject exCam = GameObject.Find("External Camera");
+			if (exCam != null) {
+				exCam.active = false;
 				hasAutoFixed = true;
+			}
+
+			GameObject exCon = GameObject.Find("Controller (third)");
+			if (exCon != null) {
+				exCon.active = false;
+				hasAutoFixed = true;
+			}
+
+			// The blue ring under the player causes alpha issues around legs depending on camera distance.
+			GameObject trackingRing = GameObject.Find("Tracking ring");
+			if (trackingRing != null) {
+				trackingRing.layer = (int)GameLayer.ExcludeFromLIV;
+			}
+        }
+
+		private GameObject hackObscura;
+        private GameObject hackRemoteTrackingRing;
+        private void OnPreRender(SDKRender obj) {
+            //This is the weird black out effect when teleporting
+            hackObscura = GameObject.Find("Obscurer");
+            if (hackObscura != null) {
+                hackObscura.layer = (int)GameLayer.ExcludeFromLIV;
             }
 
-            GameObject exCon = GameObject.Find("Controller (third)");
-            if (exCon != null) {
-                MelonLogger.Msg("Disabling 'Controller (third)' to fix game.");
-                exCon.active = false;
-                hasAutoFixed = true;
+            //This is the other blue ring that causes alpha issues, can't do as soon as LIV attached on a level load
+            hackRemoteTrackingRing = GameObject.Find("Remote tracking ring");
+            if (hackRemoteTrackingRing != null) {
+                hackRemoteTrackingRing.layer = (int)GameLayer.ExcludeFromLIV;
+            }
+        }
+		private void OnPostRender(SDKRender obj) {
+            if (hackObscura != null) {
+                hackObscura.layer = (int)GameLayer.Portal;
+            }
+            if (hackRemoteTrackingRing != null) {
+                hackRemoteTrackingRing.layer = (int)GameLayer.MirrorObject;
             }
         }
 
-		public void TrySetupLiv() {
+        public void TrySetupLiv() {
             //Budget Cuts 1 (Arcade) and Budget Cuts 2
             //Both Unity 2018.4.23f1
             //Doesn't use SteamVR_Camera, Externalcamera.cfg will break the game.
@@ -126,7 +154,7 @@ namespace BudgetCuts2LIV
 			}
 			catch (Exception)
 			{
-				LIV.SDK.Unity.LIV.Instance = null;
+                livInstance = null;
 			}
 			return null;
 		}
@@ -140,7 +168,7 @@ namespace BudgetCuts2LIV
 			}
 			catch (Exception)
 			{
-				LIV.SDK.Unity.LIV.Instance = null;
+                livInstance = null;
 			}
 			return null;
 		}
@@ -176,20 +204,16 @@ namespace BudgetCuts2LIV
 			livObject = new GameObject("LIV");
 			livObject.SetActive(false);
 
-			var liv = livObject.AddComponent<LIV.SDK.Unity.LIV>();
-			liv.HMDCamera = camera;
-			liv.MRCameraPrefab = cameraFromPrefab;
-			liv.stage = cameraParent;
-			liv.fixPostEffectsAlpha = true;
+            livInstance = livObject.AddComponent<LIV.SDK.Unity.LIV>();
+            livInstance.HMDCamera = camera;
+            livInstance.MRCameraPrefab = cameraFromPrefab;
+            livInstance.stage = cameraParent;
+            livInstance.fixPostEffectsAlpha = true;
+            livInstance.spectatorLayerMask = -1073741825; //ExcludeFromLiv
+            livInstance.onPreRender += OnPreRender;
+            livInstance.onPostRender += OnPostRender;
 
-			//var volumetricGameSDK = livObject.AddComponent<VolumetricGameSDK>();
-			//volumetricGameSDK.stage = cameraParent;
-			//volumetricGameSDK.HMDCamera = cameraFromPrefab;
-			//volumetricGameSDK.spectatorLayerMask = camera.cullingMask;// | 1 << (int) GameLayer.LivOnly; //From Boneworks mod
-
-			//livObject.AddComponent<WasapiCapture>();
-
-			livObject.SetActive(true);
+            livObject.SetActive(true);
 		}
 	}
 }
