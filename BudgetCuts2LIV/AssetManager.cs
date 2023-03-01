@@ -1,34 +1,26 @@
 ﻿using System;
 using System.IO;
-using MelonLoader;
-using UnityEngine;
-using UnhollowerRuntimeLib;
-using Object = UnityEngine.Object;
 
-namespace BudgetCuts2LIV
-{
-	public class AssetManager
-	{
-		private readonly string assetsDirectory;
+namespace BudgetCuts2LIV {
 
-		public AssetManager(string assetsDirectory)
-		{
-			this.assetsDirectory = assetsDirectory;
-		}
+    public class AssetManager {
+        private readonly string assetsDirectory;
 
-		public UniverseLib.AssetBundle LoadBundle(string assetName)
-		{
+        public AssetManager(string assetsDirectory) {
+            this.assetsDirectory = assetsDirectory;
+        }
+
+        public UniverseLib.AssetBundle LoadBundle(string assetName) {
             var bundlePath = Path.Combine(assetsDirectory, assetName);
             //var bundle = AssetBundle.LoadFromFile(Path.Combine(MelonLoader.MelonUtils.BaseDirectory, assetsDir, assetName));
-			//var bundle = AssetBundle.LoadFromFile(bundlePath);
-			var bundle = UniverseLib.AssetBundle.LoadFromFile(bundlePath);
+            //var bundle = AssetBundle.LoadFromFile(bundlePath);
+            var bundle = UniverseLib.AssetBundle.LoadFromFile(bundlePath);
 
-			if (bundle == null)
-			{
-				throw new Exception("Failed to load asset bundle " + bundlePath);
-			}
+            if (bundle == null) {
+                throw new Exception("Failed to load asset bundle " + bundlePath);
+            }
 
-			return bundle;
-		}
-	}
+            return bundle;
+        }
+    }
 }

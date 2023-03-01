@@ -324,7 +324,13 @@
     <Compile Include="SystemLibrary.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LIVAssets\*">
+    <Content Include="LIVAssets\liv-shaders">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LIVAssets\liv-shaders.manifest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LIVAssets\LIV_Bridge.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ModPackageFiles\*" />
