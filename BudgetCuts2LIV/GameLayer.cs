@@ -1,5 +1,7 @@
 ﻿namespace BudgetCuts2LIV {
+
     public enum GameLayer {
+
         //From BC1
         Default = 0,
         TransparentFX = 1,
