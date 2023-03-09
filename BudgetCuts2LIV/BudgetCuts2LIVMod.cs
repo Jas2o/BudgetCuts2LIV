@@ -16,8 +16,8 @@ namespace BudgetCuts2LIV {
         private Camera spawnedCamera;
         private static LIV.SDK.Unity.LIV livInstance;
 
-        public override void OnApplicationStart() {
-            base.OnApplicationStart();
+        public override void OnInitializeMelon() {
+            base.OnInitializeMelon();
 
             SetUpLiv();
             ClassInjector.RegisterTypeInIl2Cpp<LIV.SDK.Unity.LIV>();
@@ -190,7 +190,8 @@ namespace BudgetCuts2LIV {
             livInstance.MRCameraPrefab = cameraFromPrefab;
             livInstance.stage = cameraParent;
             livInstance.fixPostEffectsAlpha = true;
-            livInstance.spectatorLayerMask = -1073741825; //ExcludeFromLiv
+            livInstance.spectatorLayerMask = ~0;
+            livInstance.spectatorLayerMask &= ~(1 << (int)GameLayer.ExcludeFromLIV);
             livInstance.onPreRender += OnPreRender;
             livInstance.onPostRender += OnPostRender;
 
