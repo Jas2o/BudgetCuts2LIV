@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetCuts2LIV", "BudgetCut
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetCutsFixExternalCamera", "BudgetCutsFixExternalCamera\BudgetCutsFixExternalCamera.csproj", "{524B8959-CA64-4683-9FBF-58806C744A96}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetCutsUltimateLIV", "BudgetCutsUltimateLIV\BudgetCutsUltimateLIV.csproj", "{582DF572-C32F-4459-89D4-F94EDE359310}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{524B8959-CA64-4683-9FBF-58806C744A96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{524B8959-CA64-4683-9FBF-58806C744A96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{524B8959-CA64-4683-9FBF-58806C744A96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{582DF572-C32F-4459-89D4-F94EDE359310}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{582DF572-C32F-4459-89D4-F94EDE359310}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{582DF572-C32F-4459-89D4-F94EDE359310}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{582DF572-C32F-4459-89D4-F94EDE359310}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
